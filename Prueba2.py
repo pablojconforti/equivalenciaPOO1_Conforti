@@ -8,7 +8,6 @@ import unittest
 
 class TestPlanet(unittest.TestCase):
     def setUp(self):
-        # Create individuals, soldiers, weapons, and planet instances
         self.julieta = Person(42)
         self.ana = Athlete(25)
         self.rosa = Athlete(45)
@@ -24,7 +23,6 @@ class TestPlanet(unittest.TestCase):
         self.luisa = Teacher(35)
         self.luisa.cursos_dados(1)
         
-
         self.soldier1 = Soldier(30)
         self.pistolete1 = Pistolete(8)
         self.soldier1.agregar_arma(self.pistolete1)
@@ -48,45 +46,28 @@ class TestPlanet(unittest.TestCase):
         self.planet1.agregar_habitante(self.soldier2)
 
     def test_construir_muralla(self):
-        # Before tribute: km_murallas = 0
         self.assertEqual(self.planet1.km_murallas, 0)
-
-        # Offer tribute: athletes offer 2 km of walls each
         self.ana.ofrecer_tributo(self.planet1)
         self.perla.ofrecer_tributo(self.planet1)
-
-        # After tribute: km_murallas = 4
         self.assertEqual(self.planet1.km_murallas, 4)
 
     def test_founding_museum(self):
-        # Before tribute: museos = 0
         self.assertEqual(self.planet1.museos, 0)
-        
-
-        # Offer tribute: teachers offer to found a museum each
         self.monica.ofrecer_tributo(self.planet1)
-   
         self.luisa.ofrecer_tributo(self.planet1)
-
-        # After tribute: museos = 1
         self.assertEqual(self.planet1.museos, 1)
         
     def test_poder_real(self):
         self.assertEqual(self.planet1.poder_real(),282)
+        
     def test_poder_aparente(self):
-        # Apparent power is the highest power (50) * number of inhabitants (8)
         self.assertEqual(self.planet1.poder_aparente(), 496)
 
     def test_necesita_refuerzo(self):
-        # Apparent power is 496, real power is 282 = 282*2 = 564 & 564>496
         self.assertFalse(self.planet1.necesita_refuerzo())
-
 
     def test_habitantes_valiosos(self):
         habitantes_valiosos = self.planet1.habitantes_valiosos()
-
-    
-        # Only Rosa, Monica,Perla,Ana, Soldier1, and Soldier2 have a value of 40 or more
         self.assertEqual(len(habitantes_valiosos), 6)
         self.assertIn(self.rosa, habitantes_valiosos)
         self.assertIn(self.monica, habitantes_valiosos)
@@ -94,41 +75,25 @@ class TestPlanet(unittest.TestCase):
         self.assertIn(self.soldier2, habitantes_valiosos)
 
     def test_ofrecer_tributo_athlete(self):
-        # Before tribute: km_murallas = 0
         self.assertEqual(self.planet1.km_murallas, 0)
-
-        # Offer tribute: athletes offer 2 km of walls each
         self.ana.ofrecer_tributo(self.planet1)
         self.perla.ofrecer_tributo(self.planet1)
-
-        # After tribute: km_murallas = 4
         self.assertEqual(self.planet1.km_murallas, 4)
 
     def test_ofrecer_tributo_teacher(self):
-        # Before tribute: museos = 0
         self.assertEqual(self.planet1.museos, 0)
-
-        # Offer tribute: teachers offer to found a museum each
         self.monica.ofrecer_tributo(self.planet1)
         self.luisa.ofrecer_tributo(self.planet1)
-
-        # After tribute: museos = 1
         self.assertEqual(self.planet1.museos, 1)
 
     def test_ofrecer_tributo_soldier(self):
-        # Before tribute: km_murallas = 0
         self.assertEqual(self.planet1.km_murallas, 0)
-
-        # Offer tribute: soldiers offer 5 km of walls each
         self.soldier1.ofrecer_tributo(self.planet1)
         self.soldier2.ofrecer_tributo(self.planet1)
-
-        # After tribute: km_murallas = 10
         self.assertEqual(self.planet1.km_murallas, 10)
 
     def test_apaciguar_planeta(self):
         planet2 = Planet()
-        # After appeasement, planet2 should have 1 museos and 16 km of walls (2 soldiers * 5 km each) and 3*2 
         self.planet1.apaciguar_planeta(planet2)
         self.assertEqual(planet2.museos, 1)
         self.assertEqual(planet2.km_murallas, 16)

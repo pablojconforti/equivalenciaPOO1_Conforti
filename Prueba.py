@@ -6,9 +6,6 @@ from Soldado import Soldier
 from Armas import Pistolete,Espadon
 import unittest
 
-# Import the classes if they are in a separate file or the same file
-# where you have defined the classes.
-
 class TestPerson(unittest.TestCase):
     
     def test_julieta(self):
